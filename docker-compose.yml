@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - database
+    networks:
+      - moviebooking-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - moviebooking-network
+
+  database:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=moviedb
+      - POSTGRES_USER=movieuser
+      - POSTGRES_PASSWORD=moviepass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - moviebooking-network
+
+networks:
+  moviebooking-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
