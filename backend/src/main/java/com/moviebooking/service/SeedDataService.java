@@ -46,7 +46,7 @@ public class SeedDataService implements CommandLineRunner {
     private void seedMovies() {
         Movie[] movies = {
             new Movie("Avatar: The Way of Water", 192, "Sci-Fi",
-                     "avatar.png",
+                     "spider.png",
                      "Set more than a decade after the events of the first film, Avatar: The Way of Water begins to tell the story of the Sully family, the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure."),
 
             new Movie("Inception", 148, "Thriller",
