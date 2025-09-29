@@ -45,11 +45,11 @@ public class SecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/movies/**").permitAll()          // API_BASE_URL me /api remove hua
-                .requestMatchers("/showtimes/**").permitAll()
-                .requestMatchers("/nlp/**").permitAll()
-                .requestMatchers("/payments/mock").permitAll()
-                .requestMatchers("/bookings/**").permitAll()
+                .requestMatchers("/api/movies/**").permitAll()
+                .requestMatchers("/api/showtimes/**").permitAll()
+                .requestMatchers("/api/nlp/**").permitAll()
+                .requestMatchers("/api/payments/mock").permitAll()
+                .requestMatchers("/api/bookings/**").permitAll()
                 .requestMatchers("/posters/**").permitAll()
                 .requestMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()
