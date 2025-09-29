@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_BASE_URL = '/api'
+const API_BASE_URL = 'https://moviess-booking-8.onrender.com/api'  // backend URL
 
 // Movies API
 export const moviesAPI = {
@@ -8,9 +8,10 @@ export const moviesAPI = {
   getById: (id) => axios.get(`${API_BASE_URL}/movies/${id}`),
   search: (title) => axios.get(`${API_BASE_URL}/movies/search?title=${title}`)
 }
+
 // Posters API
 export const postersAPI = {
-  get: (filename) => `${API_BASE_URL.replace('/api', '')}/posters/${filename}`
+  get: (filename) => `https://moviess-booking-8.onrender.com/posters/${filename}`
 }
 
 // Bookings API
@@ -27,7 +28,6 @@ export const paymentsAPI = {
   confirmOTP: (otpData) => axios.post(`${API_BASE_URL}/payments/mock/confirm`, otpData)
 }
 
-
 // NLP API
 export const nlpAPI = {
   parse: (text) => axios.post(`${API_BASE_URL}/nlp/parse`, { text })
@@ -38,3 +38,4 @@ export const authAPI = {
   login: (credentials) => axios.post(`${API_BASE_URL}/auth/login`, credentials),
   signup: (userData) => axios.post(`${API_BASE_URL}/auth/signup`, userData)
 }
+
