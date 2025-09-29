@@ -135,6 +135,3 @@ public class SeedDataService implements CommandLineRunner {
         userRepository.save(demoUser);
     }
 }
-
-
-
