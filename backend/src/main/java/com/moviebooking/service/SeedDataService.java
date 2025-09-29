@@ -46,23 +46,23 @@ public class SeedDataService implements CommandLineRunner {
     private void seedMovies() {
         Movie[] movies = {
             new Movie("Avatar: The Way of Water", 192, "Sci-Fi",
-                     "spider.png",
+                     "/posters/spider.png",
                      "Set more than a decade after the events of the first film, Avatar: The Way of Water begins to tell the story of the Sully family, the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure."),
 
             new Movie("Inception", 148, "Thriller",
-                     "dune.png",
+                     "/posters/dune.png",
                      "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O."),
 
             new Movie("Dune", 155, "Sci-Fi",
-                     "avatar.png",
+                     "/posters/avatar.png",
                      "Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, must travel to the most dangerous planet in the universe to ensure the future of his family and his people."),
 
             new Movie("Spider-Man: No Way Home", 148, "Action",
-                     "image.png",
+                     "/posters/image.png",
                      "With Spider-Man's identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man."),
 
             new Movie("Interstellar", 169, "Sci-Fi",
-                     "inter.png",
+                     "/posters/inter.png",
                      "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.")
         };
 
@@ -98,18 +98,11 @@ public class SeedDataService implements CommandLineRunner {
         }
     }
 
-    // private void createShowtime(Movie movie, String theater, String city,
-    //                             LocalDateTime startTime, int seatsTotal) {
-    //     String seatMap = generateSeatMap(seatsTotal);
-    //     Showtime showtime = new Showtime(movie, theater, city, startTime, seatsTotal, seatMap);
-    //     showtimeRepository.save(showtime);
-    // }
     private void createShowtime(Movie movie, String theater, String city, LocalDateTime startTime, int seatsTotal) {
-    String seatMap = generateSeatMap(seatsTotal);
-    Showtime showtime = new Showtime(movie, theater, city, startTime, seatsTotal, seatMap);
-    showtimeRepository.save(showtime);
-}
-
+        String seatMap = generateSeatMap(seatsTotal);
+        Showtime showtime = new Showtime(movie, theater, city, startTime, seatsTotal, seatMap);
+        showtimeRepository.save(showtime);
+    }
 
     private String generateSeatMap(int seatsTotal) {
         int seatsPerRow = 10;
@@ -145,3 +138,4 @@ public class SeedDataService implements CommandLineRunner {
         userRepository.save(demoUser);
     }
 }
+
