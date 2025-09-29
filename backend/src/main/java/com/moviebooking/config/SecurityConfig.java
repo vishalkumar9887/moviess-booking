@@ -55,8 +55,9 @@ public class SecurityConfig {
                 .requestMatchers("/api/payments/**").permitAll()
                 .anyRequest().authenticated()
             )
-            .headers(headers -> headers.frameOptions().sameOrigin());
+            .headers(headers -> headers.frameOptions().sameOrigin()); // H2 console के लिए
 
+        // JWT filter को UsernamePasswordAuthenticationFilter से पहले add करें
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
@@ -65,7 +66,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // Frontend URL fix
+        // सिर्फ frontend URL allow करें
         configuration.setAllowedOriginPatterns(List.of("https://moviess-booking-9.onrender.com"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
@@ -76,4 +77,5 @@ public class SecurityConfig {
         return source;
     }
 }
+
 
