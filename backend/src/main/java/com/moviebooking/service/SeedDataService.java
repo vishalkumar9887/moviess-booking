@@ -46,24 +46,24 @@ public class SeedDataService implements CommandLineRunner {
     private void seedMovies() {
         Movie[] movies = {
             new Movie("Avatar: The Way of Water", 192, "Sci-Fi",
-                     "/posters/spider.png",
-                     "Set more than a decade after the events of the first film, Avatar: The Way of Water begins to tell the story of the Sully family, the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure."),
+                     "spider.png",
+                     "Set more than a decade after the events of the first film, Avatar: The Way of Water begins to tell the story of the Sully family..."),
 
             new Movie("Inception", 148, "Thriller",
-                     "/posters/dune.png",
-                     "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O."),
+                     "dune.png",
+                     "A thief who steals corporate secrets through the use of dream-sharing technology..."),
 
             new Movie("Dune", 155, "Sci-Fi",
-                     "/posters/avatar.png",
-                     "Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, must travel to the most dangerous planet in the universe to ensure the future of his family and his people."),
+                     "avatar.png",
+                     "Paul Atreides, a brilliant and gifted young man born into a great destiny..."),
 
             new Movie("Spider-Man: No Way Home", 148, "Action",
-                     "/posters/image.png",
-                     "With Spider-Man's identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man."),
+                     "image.png",
+                     "With Spider-Man's identity now revealed, Peter asks Doctor Strange for help..."),
 
             new Movie("Interstellar", 169, "Sci-Fi",
-                     "/posters/inter.png",
-                     "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.")
+                     "inter.png",
+                     "The adventures of a group of explorers who make use of a newly discovered wormhole...")
         };
 
         for (Movie movie : movies) {
@@ -74,7 +74,6 @@ public class SeedDataService implements CommandLineRunner {
     private void seedShowtimes() {
         List<Movie> movies = movieRepository.findAll();
         for (Movie movie : movies) {
-            // PVR Phoenix Pune
             createShowtime(movie, "PVR Phoenix Pune", "Pune",
                            LocalDateTime.now().plusDays(1).withHour(16).withMinute(0), 120);
             createShowtime(movie, "PVR Phoenix Pune", "Pune",
@@ -82,7 +81,6 @@ public class SeedDataService implements CommandLineRunner {
             createShowtime(movie, "PVR Phoenix Pune", "Pune",
                            LocalDateTime.now().plusDays(1).withHour(22).withMinute(0), 120);
 
-            // INOX River
             createShowtime(movie, "INOX River", "Pune",
                            LocalDateTime.now().plusDays(2).withHour(15).withMinute(30), 100);
             createShowtime(movie, "INOX River", "Pune",
@@ -90,7 +88,6 @@ public class SeedDataService implements CommandLineRunner {
             createShowtime(movie, "INOX River", "Pune",
                            LocalDateTime.now().plusDays(2).withHour(21).withMinute(30), 100);
 
-            // Today additional showtimes
             createShowtime(movie, "PVR Phoenix Pune", "Pune",
                            LocalDateTime.now().withHour(19).withMinute(0), 120);
             createShowtime(movie, "INOX River", "Pune",
@@ -138,5 +135,6 @@ public class SeedDataService implements CommandLineRunner {
         userRepository.save(demoUser);
     }
 }
+
 
 
