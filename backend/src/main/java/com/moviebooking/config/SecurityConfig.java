@@ -40,21 +40,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf(csrf -> csrf.disable())
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/movies/**").permitAll()
-                .requestMatchers("/api/showtimes/**").permitAll()
-                .requestMatchers("/api/nlp/**").permitAll()
-                .requestMatchers("/api/payments/mock").permitAll()
-                .requestMatchers("/api/bookings/**").permitAll()
-                .requestMatchers("/posters/**").permitAll()
-                .requestMatchers("/h2-console/**").permitAll()
-                .anyRequest().authenticated()
-            )
-            .headers(headers -> headers.frameOptions().sameOrigin());
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/movies/**").permitAll()
+                        .requestMatchers("/api/showtimes/**").permitAll()
+                        .requestMatchers("/api/nlp/**").permitAll()
+                        .requestMatchers("/api/payments/mock").permitAll()
+                        .requestMatchers("/api/bookings/**").permitAll()
+                        .requestMatchers("/posters/**").permitAll()
+                        .requestMatchers("/h2-console/**").permitAll()
+                        .anyRequest().authenticated())
+                .headers(headers -> headers.frameOptions().sameOrigin());
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -64,7 +63,10 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(List.of("https://moviess-booking-9.onrender.com"));
+        configuration.setAllowedOriginPatterns(
+                List.of(
+                        "https://moviess-booking-9.onrender.com",
+                        "http://localhost:3000"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
