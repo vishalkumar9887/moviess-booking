@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // Dynamic backend URL
 const API_BASE_URL = process.env.NODE_ENV === 'production'
-  ? 'https://moviess-booking-9.onrender.com'   // backend deployed URL (no /api)
+  ? 'https://moviess-booking-9.onrender.com/api'   // /api added for movies, bookings, etc.
   : 'http://localhost:8080/api'
 
 // Movies API
@@ -16,10 +16,8 @@ export const moviesAPI = {
 export const postersAPI = {
   get: (imagePath) => {
     if (!imagePath) return '';
-    if (imagePath.startsWith('/') || imagePath.startsWith('http')) {
-      return imagePath; // already absolute
-    }
-    return `/posters/${imagePath.replace(/^\/+/, '')}`; 
+    if (imagePath.startsWith('/') || imagePath.startsWith('http')) return imagePath;
+    return `/posters/${imagePath.replace(/^\/+/, '')}`;
   }
 }
 
