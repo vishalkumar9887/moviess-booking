@@ -50,14 +50,13 @@ public class SecurityConfig {
                 .requestMatchers("/api/nlp/**").permitAll()
                 .requestMatchers("/api/payments/mock").permitAll()
                 .requestMatchers("/h2-console/**").permitAll()
-                 .requestMatchers("/api/bookings/**").permitAll()
+                .requestMatchers("/api/bookings/**").permitAll()
                 .requestMatchers("/posters/**").permitAll()
-                .requestMatchers("/api/payments/**").permitAll() 
+                .requestMatchers("/api/payments/**").permitAll()
                 .anyRequest().authenticated()
             )
-            .headers(headers -> headers.frameOptions().sameOrigin()); // H2 console के लिए
+            .headers(headers -> headers.frameOptions().sameOrigin());
 
-        // JWT filter को UsernamePasswordAuthenticationFilter से पहले add करें
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
@@ -66,7 +65,8 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(List.of("*")); // सब origins allow
+        // Frontend URL fix
+        configuration.setAllowedOriginPatterns(List.of("https://moviess-booking-9.onrender.com"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
@@ -76,3 +76,4 @@ public class SecurityConfig {
         return source;
     }
 }
+
