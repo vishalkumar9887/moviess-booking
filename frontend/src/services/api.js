@@ -1,47 +1,61 @@
-import axios from 'axios'
+import axios from "axios";
 
 // Dynamic backend URL
-const API_BASE_URL = process.env.NODE_ENV === 'production'
-  ? 'https://moviess-booking-9.onrender.com/api'   // /api added for movies, bookings, etc.
-  : 'http://localhost:8080/api'
+const API_BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://moviess-booking-9.onrender.com/api" // /api added for movies, bookings, etc.
+    : "http://localhost:8080/api";
 
 // Movies API
 export const moviesAPI = {
   getAll: () => axios.get(`${API_BASE_URL}/movies`),
   getById: (id) => axios.get(`${API_BASE_URL}/movies/${id}`),
-  search: (title) => axios.get(`${API_BASE_URL}/movies/search?title=${title}`)
-}
+  search: (title) => axios.get(`${API_BASE_URL}/movies/search?title=${title}`),
+};
 
 // Posters API
 export const postersAPI = {
   get: (imagePath) => {
-    if (!imagePath) return '';
-    if (imagePath.startsWith('/') || imagePath.startsWith('http')) return imagePath;
-    return `/posters/${imagePath.replace(/^\/+/, '')}`;
-  }
-}
+    if (!imagePath) return "";
+    if (imagePath.startsWith("http")) return imagePath;
+    const baseUrl =
+      process.env.NODE_ENV === "production"
+        ? "https://moviess-booking-9.onrender.com"
+        : "http://localhost:8080";
+
+    // Agar path already /posters/ se start ho raha hai, baseUrl ke sath attach kar do
+    if (imagePath.startsWith("/posters/")) return `${baseUrl}${imagePath}`;
+
+    // Nahi toh normal posters path
+    return `${baseUrl}/posters/${imagePath.replace(/^\/+/, "")}`;
+  },
+};
+
 
 // Bookings API
 export const bookingsAPI = {
   create: (bookingData) => axios.post(`${API_BASE_URL}/bookings`, bookingData),
   getById: (id) => axios.get(`${API_BASE_URL}/bookings/${id}`),
   getMyBookings: () => axios.get(`${API_BASE_URL}/bookings/my-bookings`),
-  getGuestBookings: (email) => axios.get(`${API_BASE_URL}/bookings/guest/${email}`)
-}
+  getGuestBookings: (email) =>
+    axios.get(`${API_BASE_URL}/bookings/guest/${email}`),
+};
 
 // Payments API
 export const paymentsAPI = {
-  initiateMock: (paymentData) => axios.post(`${API_BASE_URL}/payments/mock`, paymentData),
-  confirmOTP: (otpData) => axios.post(`${API_BASE_URL}/payments/mock/confirm`, otpData)
-}
+  initiateMock: (paymentData) =>
+    axios.post(`${API_BASE_URL}/payments/mock`, paymentData),
+  confirmOTP: (otpData) =>
+    axios.post(`${API_BASE_URL}/payments/mock/confirm`, otpData),
+};
 
 // NLP API
 export const nlpAPI = {
-  parse: (text) => axios.post(`${API_BASE_URL}/nlp/parse`, { text })
-}
+  parse: (text) => axios.post(`${API_BASE_URL}/nlp/parse`, { text }),
+};
 
 // Auth API
 export const authAPI = {
   login: (credentials) => axios.post(`${API_BASE_URL}/auth/login`, credentials),
-  signup: (userData) => axios.post(`${API_BASE_URL}/auth/signup`, userData)
-}
+  signup: (userData) => axios.post(`${API_BASE_URL}/auth/signup`, userData),
+};
