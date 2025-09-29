@@ -45,19 +45,17 @@ public class SecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/movies/**").permitAll()
-                .requestMatchers("/api/showtimes/**").permitAll()
-                .requestMatchers("/api/nlp/**").permitAll()
-                .requestMatchers("/api/payments/mock").permitAll()
-                .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("/api/bookings/**").permitAll()
+                .requestMatchers("/movies/**").permitAll()          // API_BASE_URL me /api remove hua
+                .requestMatchers("/showtimes/**").permitAll()
+                .requestMatchers("/nlp/**").permitAll()
+                .requestMatchers("/payments/mock").permitAll()
+                .requestMatchers("/bookings/**").permitAll()
                 .requestMatchers("/posters/**").permitAll()
-                .requestMatchers("/api/payments/**").permitAll()
+                .requestMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()
             )
-            .headers(headers -> headers.frameOptions().sameOrigin()); // H2 console के लिए
+            .headers(headers -> headers.frameOptions().sameOrigin());
 
-        // JWT filter को UsernamePasswordAuthenticationFilter से पहले add करें
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
@@ -66,7 +64,6 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // सिर्फ frontend URL allow करें
         configuration.setAllowedOriginPatterns(List.of("https://moviess-booking-9.onrender.com"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
@@ -77,5 +74,6 @@ public class SecurityConfig {
         return source;
     }
 }
+
 
 
