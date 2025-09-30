@@ -21,9 +21,13 @@ spring:
       hibernate:
         format_sql: true
 
+  web:
+    resources:
+      static-locations: classpath:/static/,file:./posters/  # 🔹 posters folder serve karne ke liye
+
 jwt:
   secret: mySecretKey123456789012345678901234567890
   expiration: 86400000 # 24 hours
 
 cors:
-  allowed-origins: http://localhost:3000,http://localhost:5173
+  allowed-origins: http://localhost:3000,http://localhost:5173,https://moviess-booking.vercel.app
