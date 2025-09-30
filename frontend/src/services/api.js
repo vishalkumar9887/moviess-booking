@@ -13,8 +13,21 @@ export const moviesAPI = {
 // -------------------- Posters API --------------------
 export const postersAPI = {
   get: (imagePath) => {
-    if (!imagePath) return "";
-    if (imagePath.startsWith("http")) return imagePath;
+    if (!imagePath) return "";           // agar path empty ho to blank return
+    if (imagePath.startsWith("http")) return imagePath; // agar full URL ho to use directly
+
+    // Base URL from environment variable
+    const baseUrl = import.meta.env.VITE_API_URL.replace("/api", ""); 
+    // /api remove karna important hai, images /posters route pe hote hain
+
+    // Agar imagePath /posters/ se start ho raha hai
+    if (imagePath.startsWith("/posters/")) return `${baseUrl}${imagePath}`;
+
+    // Normal case
+    return `${baseUrl}/posters/${imagePath.replace(/^\/+/, "")}`;
+  },
+};
+
 
     // Base URL from environment
     const baseUrl = API_BASE_URL.replace("/api", ""); // remove /api for images path
