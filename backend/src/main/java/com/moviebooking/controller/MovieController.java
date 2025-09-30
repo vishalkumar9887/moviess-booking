@@ -19,7 +19,8 @@ import com.moviebooking.service.MovieService;
 
 @RestController
 @RequestMapping("/api/movies")
-@CrossOrigin(origins = "*")
+// Apna frontend ka exact URL allow karo (Vercel ka)
+@CrossOrigin(origins = "https://moviess-booking.vercel.app")
 public class MovieController {
     
     @Autowired
