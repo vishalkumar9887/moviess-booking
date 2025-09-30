@@ -16,22 +16,12 @@ export const postersAPI = {
     if (!imagePath) return "";
     if (imagePath.startsWith("http")) return imagePath;
 
-    const baseUrl = import.meta.env.VITE_API_URL.replace("/api", "");
-
-    if (imagePath.startsWith("/posters/")) return `${baseUrl}${imagePath}`;
-
-    return `${baseUrl}/posters/${imagePath.replace(/^\/+/, "")}`;
-  } // <-- no comma here
-};
-
-
-
-    // Base URL from environment
     const baseUrl = API_BASE_URL.replace("/api", ""); // remove /api for images path
+
     if (imagePath.startsWith("/posters/")) return `${baseUrl}${imagePath}`;
 
     return `${baseUrl}/posters/${imagePath.replace(/^\/+/, "")}`;
-  },
+  } // 🔹 no comma here
 };
 
 // -------------------- Bookings API --------------------
@@ -61,4 +51,3 @@ export const authAPI = {
   login: (credentials) => axios.post(`${API_BASE_URL}/auth/login`, credentials),
   signup: (userData) => axios.post(`${API_BASE_URL}/auth/signup`, userData),
 };
-
